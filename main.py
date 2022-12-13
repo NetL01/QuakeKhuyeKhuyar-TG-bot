@@ -1,10 +1,6 @@
 import telebot
 
 try:
-
-
-
-
 	@bot.message_handler(commands=['start'])
 	def start(message):
 		bot.send_message(message.chat.id, text=f'Hello,	{message.from_user.username}!')
