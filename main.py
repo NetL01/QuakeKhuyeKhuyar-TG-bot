@@ -83,7 +83,8 @@ try:
     @bot.message_handler(commands=['get_weather', 'weather', 'pogoda'])
     def get_weather(message):
         bot.send_message(message.chat.id, text=f'На деле: {res.fact.temp} °C, но блять словно все {res.fact.feels_like} °C')
-        bot.send_message(message.chat.id, text=f'На небе: {res.fact.condition}')
+        dict_condition = {"clear": "ясно", "overcast": "пасмурно", "rain": "дождь", "cloudy": "облачно"}
+        bot.send_message(message.chat.id, text=f'На небе: {dict_condition[res.fact.condition]}')
 
 
 
