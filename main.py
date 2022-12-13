@@ -71,7 +71,35 @@ try:
 
     @bot.message_handler(commands=['пидор_дня'.upper().lower()])
     def who_pidor(message):
-        bot.send_message(-1001803296788, text=message.chat.id)
+        import random
+
+        # Пункт 1: примите ислам
+
+        dict = {"Никита Перфоратор": 0, "Никита Сатисфекшн": 0, "Дмитрий Кузнайн Шпала Липецк": 0,
+                "Семен банго стив гей": 0, " Кирилл шнурок коврик волосатая мохнатка хеппикодер": 0}
+
+
+        for key, value in dict.items():
+            dict[key] = random.randint(0, 100)
+        sorted(dict.items(), key=lambda item: (item[1], item[0]))
+        k = 0
+        pidors = []
+        cocorols = []
+        good_boys = []
+
+        sorted_dict = {}
+        sorted_keys = sorted(dict, key=dict.get, reverse=True)  # [1, 3, 2]
+
+        for w in sorted_keys:
+            sorted_dict[w] = dict[w]
+
+        for key, value in sorted_dict.items():
+            if k == 0:
+                to_pin = bot.send_message(message.chat.id, f'Пидор дня: {key}').message_id
+                bot.pin_chat_message(chat_id=message.chat.id, message_id=to_pin)
+            k += 1
+
+
 
 
     @bot.message_handler(commands=['close_session'])
