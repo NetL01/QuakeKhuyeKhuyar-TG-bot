@@ -5,13 +5,25 @@ import telebot
 from yaweather import Russia, YaWeather
 import random
 import multiprocessing
+import threading
+import pickle
+import os
+import json
 
 
 a = ['123', '321']
 # Main token to start
 bot = telebot.TeleBot('5849840132:AAEHFN1i-u6ZiglFRYL4jcwvL-1_R9DuKdM')
 # bot.send_message(-1001803296788, text=f"{datetime.now()} bot started")
-todo_list = {}
+
+target_dist = 'saved_dictionary.pkl'
+if os.path.getsize(target_dist) > 0:
+    with open('saved_dictionary.pkl', 'rb') as f:
+        loaded_dict = pickle.load(f)
+        todo_list = loaded_dict
+        print('132')
+else:
+    todo_list = {}
 
 try:
     @bot.message_handler(commands=['check'])
@@ -92,9 +104,16 @@ try:
 
     @bot.message_handler(commands=['stop'])
     def exit(message):
+
+
+        with open(target_dist, 'wb') as f:
+            print('Prepare to save before closed bot')
+            pickle.dump(todo_list, f)
+            # print(os.path.getsize(target_dist))
         crashlist = [1, 2, 3]
-        for i in range(len(crashlist)+10):
+        for i in range(len(crashlist) + 10):
             a = crashlist[i]
+
 
 
     with multiprocessing.Pool(2) as pool:
@@ -104,9 +123,16 @@ try:
     bot.polling(none_stop=True, interval=0)
 
 
+
 except:
     print('crashed')
     # bot.send_message(-1001803296788, text=f"{datetime.now()} bot was stopped!")
 
 if __name__ == '__main__':
-    pass
+    thr = threading.Thread(target=GoCode(), args=(), kwargs={})
+    thr.start()  # Will run "foo"
+
+
+    #thr.is_alive()  # Will return whether foo is running currently
+
+    #thr.join()  # Will wait till "foo" is done
