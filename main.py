@@ -1,27 +1,3 @@
-import datetime as datetime
-import telebot
-import sys
-import os
-import importlib
-from datetime import datetime
-import json
-import telebot
-import requests as req
-from geopy import geocoders
-from os import environ
-from yaweather import Russia, YaWeather
-
-
-y = YaWeather(api_key='2256552c-c694-4849-9715-95763b707bae')
-res = y.forecast(Russia.SaintPetersburg)
-
-
-
-# Main token to start
-bot = telebot.TeleBot('5849840132:AAEHFN1i-u6ZiglFRYL4jcwvL-1_R9DuKdM')
-url = "https://api.weather.yandex.ru/v2/informers?lat=59.957729&lon=30.309568"
-headers = {"X-Yandex-API-Key": "2256552c-c694-4849-9715-95763b707bae"}
-
 
 
 
@@ -97,6 +73,7 @@ try:
             if k == 0:
                 to_pin = bot.send_message(message.chat.id, f'Пидор дня: {key}').message_id
                 bot.pin_chat_message(chat_id=message.chat.id, message_id=to_pin)
+
             k += 1
 
 
