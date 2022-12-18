@@ -73,6 +73,27 @@ try:
 
     # TODO LIST TASKBOARD
 
+    @bot.message_handler(commands=['stats'])
+    def stats(message):
+        command = message.text.split(' ')
+        if message.from_user.username == "netl01":
+            print(command)
+            if command[1] == 'check':
+                bot.reply_to(message, text=f'Preparing to summarize scores from spreadsheets\n'
+                             f'Status:')
+                time.sleep(random.randint(1, 5))
+                bot.reply_to(message, text=f'Done.')
+                #bot.edit_message_text(message.chat.id, message_id=bot.message_id,
+                #                      text=f'Preparing to summarize scores from spreadsheets\n'
+                #                           f'Status: done')
+                time.sleep(1)
+                print('ok')
+                bot.send_message(message.chat.id, text=f'From "Разуваев Никита" :\n'
+                                 f'Практика ДМ 2022/.../Рейтинг : 37.32\n'
+                                 f'АиСД рейтинг 202.../семестр 1 : 61.05')
+        else:
+            bot.reply_to(message, text=f"Permission deny.")
+
     @bot.message_handler(commands=['todo'], content_types=['text'])
     def TODOlist(message):
         try:
