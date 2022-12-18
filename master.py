@@ -10,6 +10,7 @@ import pickle
 import os
 import json
 import time
+import asyncio
 
 target_dist = 'saved_dictionary.pkl'
 if os.path.getsize(target_dist) > 0:
@@ -145,6 +146,15 @@ try:
             bot.send_message(-1001803296788, text=f"TODO is working, try it!\n"
                                                   f"Check list = /todo list\n Add Priority elem = /todo addpr(delpr) <name> \n"
                                                   f"Add basic elem = /todo add(del) <name> ")
+
+
+    #@bot.my_chat_member_handler()
+    #def my_chat_m(message: bot.types.ChatMemberUpdated):
+    #    new = message.new_chat_member
+    #    allowlist = []
+    #    if new.status == "member" and message.chat.id not in allowlist:
+    #        bot.leave_chat(message.chat.id)
+
 
 
     # @bot.message_handler(commands='permission')
