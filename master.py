@@ -101,32 +101,33 @@ try:
             if not check_permission(message.from_user.username):
                 command = message.text.split(' ')
                 if command[1] == 'list':
+                    todo_print = ''
                     if not todo_list:
                         bot.send_message(-1001803296788, text=f"TODO list was empty!")
                     # print priority
                     else:
-                        bot.send_message(-1001803296788, text=f"PRIORITY:")
+                        # bot.send_message(-1001803296788, text=f"PRIORITY:")
+                        todo_print = '<b>PRIORITY:</b>\n\n'
+
+
                         for key, value in todo_list.items():
                             if value == 1:
-                                bot.send_message(-1001803296788, text=f"{key.upper()}")
-                        bot.send_message(-1001803296788, text=f"Пока похер:")
+                                #bot.send_message(-1001803296788, text=f"{key.upper()}")
+                                todo_print += f'{key.upper()}\n'
+
+                        todo_print += '<b>Не горит:</b>\n\n'
                         for key, value in todo_list.items():
                             if value == 0:
-                                bot.send_message(-1001803296788, text=f"{key}")
+                                #bot.send_message(-1001803296788, text=f"{key}")
+                                todo_print += f'{key}\n'
+                        bot.send_message(message.chat.id, text=f'{todo_print}', parse_mode="html")
+                        # print(todo_print)
                 else:
                     if command[1] == "addpr":
                         todo_list[command[2]] = 1
                         print(todo_list)
                         print('saved.')
                         bot.send_message(-1001803296788, text=f"saved.")
-                    if command[1] == "delpr":
-                        if command[2] in todo_list:
-                            del todo_list[command[2]]
-                            print("deleted.")
-                            bot.send_message(-1001803296788, text=f"deleted.")
-                        else:
-                            bot.send_message(-1001803296788, text=f"TODO id not found")
-
                     if command[1] == "add":
 
                         todo_list[command[2]] = 0
@@ -135,7 +136,7 @@ try:
                         bot.send_message(-1001803296788, text=f"saved.")
                     if command[1] == "del":
                         if command[2] in todo_list:
-                            del todo_list[command[2:]]
+                            del todo_list[command[2]]
                             print('deleted.')
                             bot.send_message(-1001803296788, text=f"deleted.")
                         else:
