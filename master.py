@@ -11,6 +11,12 @@ import os
 import json
 import time
 import asyncio
+from telebot import types # для указание типов
+import config
+
+
+def main():
+    print(check)
 
 target_dist = 'saved_dictionary.pkl'
 if os.path.getsize(target_dist) > 0:
@@ -42,6 +48,20 @@ bot = telebot.TeleBot('5849840132:AAEHFN1i-u6ZiglFRYL4jcwvL-1_R9DuKdM')
 # bot.send_message(-1001803296788, text=f" ")
 
 try:
+    @bot.message_handler(commands=[""])
+    def nothing(message):
+        bot.reply_to(message, text=f"дурак?")
+        time.sleep(2)
+        bot.reply_to(message, text=f"( а если серьёзно, попробуй /help )")
+
+    @bot.message_handler(commands=["кто_дурак?"])
+    def whodumb(message):
+        bot.reply_to(message, text='никита @netl01 дурак')
+
+    @bot.message_handler(commands=["help"])
+    def help(message):
+        bot.reply_to(message, text=f'Тебе уже ничто не поможет, валенок')
+
     @bot.message_handler(commands=['check', 'status'])
     def check(message):
         if not check_permission(message.from_user.username):
